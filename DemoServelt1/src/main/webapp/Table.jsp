@@ -36,6 +36,7 @@
         <% 
             ArrayList<BookingForm> values = (ArrayList<BookingForm>) request.getAttribute("bookings");
             for (BookingForm values1 : values) {
+            	
         %>
         <tr>
             <td><%= values1.getName() %></td>

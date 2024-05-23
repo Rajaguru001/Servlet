@@ -6,6 +6,14 @@ public class EmployeeForm {
 	}
 	String password;
 	
+	public EmployeeForm(String password, int id, String name, String email, String phonenumber) {
+		super();
+		this.password = password;
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phonenumber = phonenumber;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -21,6 +29,13 @@ public class EmployeeForm {
 	public String getName() {
 		return name;
 	}
+	public EmployeeForm(String password, String name, String email, String phonenumber) {
+		super();
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.phonenumber = phonenumber;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -30,15 +45,15 @@ public class EmployeeForm {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 	int id;
 	String name;
 	String email;
-	int phonenumber;
+	String phonenumber;
 
 }
