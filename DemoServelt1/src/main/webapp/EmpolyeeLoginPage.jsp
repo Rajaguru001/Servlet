@@ -4,78 +4,62 @@
 <meta charset="UTF-8">
 <title>Login Page</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
-
-.container {
-    width: 300px;
-    margin: 0 auto;
-    padding-top: 50px;
-}
-
-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-}
-
-form table {
-    width: 100%;
-}
-
-form table tr td {
-    padding: 10px 0;
-}
-
-form input[type="text"],
-form input[type="password"],
-form input[type="email"],
-form input[type="number"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-form input[type="text"]:focus,
-form input[type="password"]:focus,
-form input[type="email"]:focus,
-form input[type="number"]:focus {
-    outline: none;
-    border-color: #66afe9;
-    box-shadow: 0 0 5px #66afe9;
-}
-
-form input[type="submit"] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-form input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-}
-h1{
-font-family: Arial, sans-serif;
-text-align:center;
-
-}
-
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
 </style>
 <h1>Login Page</h1>
 </head>

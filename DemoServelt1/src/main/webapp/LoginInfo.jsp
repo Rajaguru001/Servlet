@@ -52,9 +52,14 @@ tr:hover {
 </style>
 </head>
 <body>
+		<form action="EmployeeDetails" method="get">
+<input type="hidden" name="action" value="searchvalue">	
+<input type="search" name="search">
+<button type="submit">submit</button>
+</form>
 	<table>
 		<tr>
-			<th>Name</th>
+			<th >Name</th>
 			<th>Password</th>
 			<th>email</th>
 			<th>PhoneNumber</th>
@@ -63,10 +68,12 @@ tr:hover {
 		<%
 			EmployeeDAO obj=new EmployeeDAO();
            ArrayList<EmployeeForm> val=obj.insert();
+           int i=1;
        	for(EmployeeForm values1: val)
        	{
        		%>
 		<tr>
+			<td><%=i++ %></td>
 			<td><%= values1.getName()%></td>
 			<td><%=values1.getPassword()%></td>
 			<td><%=values1.getEmail()%></td>
@@ -79,13 +86,13 @@ tr:hover {
 			</form>
 			</td>
 			<td>
-			
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="updateid" value="<%=values1.getId() %>">
 				<button type="submit" onClick="location.href= 'Updatepage.jsp?updateid=<%=values1.getId() %>'">update</button>
 			
 			</td>
  		</tr>
+ 
 
 
 

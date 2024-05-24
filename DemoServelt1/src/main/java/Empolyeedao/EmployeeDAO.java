@@ -79,6 +79,20 @@ public ArrayList<EmployeeForm> insert() throws ClassNotFoundException, SQLExcept
 	return val;
 	
 }
+public ArrayList<EmployeeForm> getcolumn(){
+	
+	return null;
+	
+}
+public static void search(String name) throws ClassNotFoundException, SQLException {
+	Connection connection=EmployeeDAO.getConnection();		
+	String query="select * from login where name like ?% ";
+	PreparedStatement ps= connection.prepareStatement(query);
+	ps.setString(1,"%"+name+"%");
+	ps.executeQuery();
+	
+	
+}
 		
 
 }

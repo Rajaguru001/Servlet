@@ -58,7 +58,6 @@ public class EmpolyeeDetails extends HttpServlet {
 				
 				EmployeeForm employeeForm = new EmployeeForm();
 				int updateuserid=Integer.parseInt(request.getParameter("updateid"));
-			//	System.out.println("update id"+updateuserid);
 				employeeForm.setId(updateuserid);
 				employeeForm.setName(request.getParameter("name"));
 				employeeForm.setPassword(request.getParameter("password"));
@@ -74,7 +73,20 @@ public class EmpolyeeDetails extends HttpServlet {
 				}
 
 				break;
-
+				
+			case "searchvalue":
+				EmployeeForm employeeForm1 = new EmployeeForm();
+				String searchid=request.getParameter("search");
+				try {
+					EmployeeDAO.search(searchid);
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("filter value"+searchid);
+				break;
+				
+				
 			}
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
 		        dispatcher.forward(request, response);
