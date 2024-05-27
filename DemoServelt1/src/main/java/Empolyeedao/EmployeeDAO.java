@@ -47,7 +47,6 @@ public static void update(EmployeeForm e) throws ClassNotFoundException, SQLExce
 	int row = ps.executeUpdate();
 	System.out.println("updated  "+row);
 	
-	
 }
 public static void delete(int id) throws ClassNotFoundException, SQLException {
 	Connection connection=EmployeeDAO.getConnection();
@@ -84,15 +83,33 @@ public ArrayList<EmployeeForm> getcolumn(){
 	return null;
 	
 }
-public static void search(String name) throws ClassNotFoundException, SQLException {
-	Connection connection=EmployeeDAO.getConnection();		
-	String query="select * from login where name like ?% ";
+public static ArrayList<EmployeeForm> search(String name) throws ClassNotFoundException, SQLException {
+	Connection connection=EmployeeDAO.getConnection();
+	ArrayList<EmployeeForm>val=new ArrayList<EmployeeForm>();
+	String query="select * from login where name like ? ";
 	PreparedStatement ps= connection.prepareStatement(query);
 	ps.setString(1,"%"+name+"%");
-	ps.executeQuery();
+	ResultSet re=ps.executeQuery();
+	while(re.next())
+	{ 
+		EmployeeForm Employeeform=new EmployeeForm();
+		
+		Employeeform.setId(re.getInt("id"));
+		Employeeform.setName(re.getString("username"));
+		Employeeform.setPassword(re.getString("password"));
+		Employeeform.setEmail(re.getString("email"));
+		Employeeform.setPhonenumber(re.getString("phonenumber"));
+		val.add(Employeeform);
+		System.out.println("the value"+val);
+	}
+	return val;
+	
 	
 	
 }
+//public static ascending() {
+//	
+//}
 		
 
 }

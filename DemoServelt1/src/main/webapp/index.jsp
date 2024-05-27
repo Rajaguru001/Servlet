@@ -30,7 +30,7 @@ form{
 <body>
  
 <form action="DemoServelt1"> 
-  <table >
+  <table>
             <tr>
                 <td> Name :</td> <td><input type="text" name="name" placeholder="User Name"  required></td>
             </tr>

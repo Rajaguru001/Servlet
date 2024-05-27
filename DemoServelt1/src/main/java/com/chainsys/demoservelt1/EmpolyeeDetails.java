@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.chainsys.pojo.EmployeeForm;
 
@@ -22,19 +23,20 @@ import Empolyeedao.EmployeeDAO;
 @WebServlet("/EmployeeDetails")
 public class EmpolyeeDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ArrayList<EmployeeForm> values=new ArrayList<EmployeeForm>();
-	//EmployeeForm details=new EmployeeForm();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmpolyeeDetails() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	ArrayList<EmployeeForm> values = new ArrayList<EmployeeForm>();
+	// EmployeeForm details=new EmployeeForm();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EmpolyeeDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -53,17 +55,27 @@ public class EmpolyeeDetails extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				try {
+
+					request.setAttribute("log", Employeedelete.insert());
+				} catch (SQLException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
+				dispatcher.forward(request, response);
+
 				break;
 			case "update":
-				
+
 				EmployeeForm employeeForm = new EmployeeForm();
-				int updateuserid=Integer.parseInt(request.getParameter("updateid"));
+				int updateuserid = Integer.parseInt(request.getParameter("updateid"));
 				employeeForm.setId(updateuserid);
 				employeeForm.setName(request.getParameter("name"));
 				employeeForm.setPassword(request.getParameter("password"));
 				employeeForm.setEmail(request.getParameter("email"));
 				employeeForm.setPhonenumber(request.getParameter("phonenumber"));
-				
+
 				EmployeeDAO Employeeupdate = new EmployeeDAO();
 				try {
 					EmployeeDAO.update(employeeForm);
@@ -71,53 +83,68 @@ public class EmpolyeeDetails extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				try {
+
+					request.setAttribute("log", Employeeupdate.insert());
+				} catch (SQLException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				RequestDispatcher dispatcher1 = request.getRequestDispatcher("LoginInfo.jsp");
+				dispatcher1.forward(request, response);
 
 				break;
-				
+
 			case "searchvalue":
 				EmployeeForm employeeForm1 = new EmployeeForm();
-				String searchid=request.getParameter("search");
+				String searchId = request.getParameter("search");
 				try {
-					EmployeeDAO.search(searchid);
+					request.setAttribute("log", EmployeeDAO.search(searchId));
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("filter value"+searchid);
-				break;
-				
-				
-			}
-			 RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
-		        dispatcher.forward(request, response);
 
+				System.out.println("filter value 1: " + searchId);
+
+				break;
+			case "ascending":
+				
+				
+
+			}
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
+			dispatcher.forward(request, response);
 		}
+
 	}
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 
-	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        String name = request.getParameter("name");
-	        String password = request.getParameter("password");
-	        String email = request.getParameter("email");
-	        String phone = request.getParameter("phonenumber");
-	        EmployeeDAO emp= new EmployeeDAO();
-	        EmployeeForm details = new EmployeeForm(password, name, email, phone);
-	    //  System.out.println(details.getName());
-	        try {
-	        	emp.login(details);
-	        } catch (SQLException | ClassNotFoundException e) {
-	            e.printStackTrace();
-	        }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phonenumber");
+		EmployeeDAO emp = new EmployeeDAO();
+		EmployeeForm details = new EmployeeForm(password, name, email, phone);
 
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
-	        dispatcher.forward(request, response);
-	       
-	    }
-	    	
-	    
+		try {
+			emp.login(details);
+			HttpSession session = request.getSession();
+			session.setAttribute("name",name);
+			request.setAttribute("log", emp.insert());
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("LoginInfo.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
-
+}
